@@ -1,0 +1,28 @@
+{
+    "engines": {
+        "node": ">=20"
+    },
+    "name": "lecow-server",
+    "version": "0.0.1",
+    "description": "Backend server to keep track of expenses by group of peole that hangs out",
+    "scripts": {
+        "dev": "nodemon --watch .env --watch src src/main.ts",
+        "eslint": "eslint",
+        "prettier": "prettier --check src",
+        "prettier:write": "prettier --write src"
+    },
+    "license": "AGPLv3",
+    "devDependencies": {
+        "@eslint/js": "^9.8.0",
+        "@types/eslint__js": "^8.42.3",
+        "@types/node": "^22.0.0",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "nodemon": "^3.1.4",
+        "prettier": "3.3.3",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^7.18.0"
+    }
+}

@@ -6,8 +6,10 @@
     "version": "0.0.1",
     "description": "Backend server to keep track of expenses by group of peole that hangs out",
     "scripts": {
-        "dev": "nodemon --watch .env --watch src src/main.ts",
-        "eslint": "eslint",
+        "dev": "nodemon --watch .env --watch ./src ./src/main.ts",
+        "build": "eslint src && prettier --check src && tsc",
+        "eslint": "eslint src",
+        "eslint:fix": "eslint src --fix",
         "prettier": "prettier --check src",
         "prettier:write": "prettier --write src"
     },
@@ -15,7 +17,9 @@
     "devDependencies": {
         "@eslint/js": "^9.8.0",
         "@types/eslint__js": "^8.42.3",
+        "@types/express": "^4.17.21",
         "@types/node": "^22.0.0",
+        "@types/pg": "^8.11.6",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",
@@ -24,5 +28,10 @@
         "ts-node": "^10.9.2",
         "typescript": "^5.5.4",
         "typescript-eslint": "^7.18.0"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "pg": "^8.12.0"
     }
 }

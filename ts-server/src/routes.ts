@@ -1,6 +1,6 @@
 import { ErrorRequestHandler, RequestHandler, Router } from "express";
 import continuator from "./lib/continue.decorator";
-import { getAllUsers } from "./controllers/users";
+import { createUser, getAllUsers } from "./controllers/users";
 import {
   commitDatabase,
   connectDatabase,
@@ -14,6 +14,7 @@ router.use(connectDatabase as RequestHandler);
 
 // app routers below
 router.get("/api/v1/users", continuator(getAllUsers));
+router.post("/api/v1/users", continuator(createUser));
 
 // keep this at the end
 router.use(commitDatabase as RequestHandler);

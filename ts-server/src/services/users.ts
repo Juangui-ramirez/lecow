@@ -10,4 +10,8 @@ export default class Service {
   async getAll(): Promise<UserEntity[]> {
     return await this.userRepo.getAll();
   }
+
+  async create(user: UserEntity): Promise<UserEntity> {
+    return await this.userRepo.create(user);
+  }
 }

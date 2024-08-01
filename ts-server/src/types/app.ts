@@ -16,8 +16,8 @@ export type Request = ExpressRequest & {
 export type Response = ExpressResponse;
 
 /// Entities
-
 export interface UserEntity {
   id: number;
   name: string;
+  email: string;
 }

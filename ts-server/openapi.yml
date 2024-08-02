@@ -1,0 +1,231 @@
+openapi: '3.0.3'
+info:
+  title: LeCow Spec
+  description: In progress API Spec for LeCow App, subject to change. Currently does not have Auth spec
+  version: '1.0'
+servers:
+  - url: http://localhost:3000/api/v1
+paths:
+  /users:
+    get:
+      description: Get all users
+      tags:
+        - users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      description: Creates a new user
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewUser'
+              required:
+                - name
+                - email
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/User'
+  /users/{id}/balance:
+    get:
+      description: Get user balance across all groups, positivalues means in favor, negative values means in debt
+      tags:
+        - balance
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: number
+              examples:
+                favor:
+                  description: has credit
+                  value:
+                    balance: 999.99
+                debt:
+                  description: has debt
+                  value:
+                    balance: -999.99
+                even:
+                  description: No credit nor debt
+                  value:
+                    balance: 0.0
+  /users/{id}/groups:
+    get:
+      description: get all groups where user belongs to with balance
+      tags:
+        - balance
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Group'
+                  - type: object
+                    properties:
+                      balance:
+                        description: Balance within the group.
+                        type: number
+  /groups:
+    get:
+      description: Get all groups
+      tags:
+        - groups
+      responses:
+        '200':
+          description: OK
+    post:
+      description: Create a group
+      tags:
+        - groups
+      responses:
+        '201':
+          description: Created
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/NewGroup'
+              required:
+                - name
+  /groups/{groupId}/user/{userId}:
+    post:
+      description: Add a user to a group
+      tags:
+        - invites
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '201':
+          description: User added to group
+        '409':
+          description: User already added
+        '404':
+          description: Group or User does no exists
+  /groups/{groupId}/user/{userId}/expenses:
+    post:
+      description: Create an expense in the group
+      tags:
+        - expenses
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewExpense'
+      responses:
+        '201':
+          description: Expense created
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+    NewUser:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        name: Some Rabbit
+        email: somerabbit@example.com
+    User:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+        - $ref: '#/components/schemas/NewUser'
+      example:
+        id: 1
+        name: rabbit
+        email: rabbit@example.com
+    NewGroup:
+      type: object
+      properties:
+        name:
+          type: string
+    Group:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+        - $ref: '#/components/schemas/NewGroup'
+    NewExpense:
+      type: object
+      properties:
+        description:
+          type: string
+        value:
+          type: number
+        participants:
+          description: User ids
+          type: array
+          items:
+            type: integer
+          uniqueItems: true
+          minItems: 1
+      required:
+        - description
+        - value
+        - participants
+      example:
+        description: 'some chill out'
+        value: 90000
+        participants:
+          - 1
+          - 2
+          - 3
+
+      

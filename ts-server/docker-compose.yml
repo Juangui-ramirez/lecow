@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: lecow
+      POSTGRES_PASSWORD: lecow
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DESIGN=dracula
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DEFAULT_USER=lecow
+    ports:
+      - 8080:8080

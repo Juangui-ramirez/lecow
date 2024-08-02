@@ -1,4 +1,3 @@
-// @ts-check
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
@@ -28,7 +27,7 @@ export default tseslint.config(
     // },
   },
   {
-    files: ["features/**/*.js"],
+    files: ["features/**/*.ts"],
     plugins: [eslintPluginJest],
   },
 );

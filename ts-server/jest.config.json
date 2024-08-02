@@ -1,0 +1,9 @@
+{
+    "testMatch": [
+        "**/*.step.ts"
+    ],
+"testEnvironment": "node",
+  "transform": {
+    "^.+.tsx?$": ["ts-jest",{}]
+  }
+}

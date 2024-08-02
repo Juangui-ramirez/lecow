@@ -2,6 +2,7 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import eslintPluginJest from "eslint-plugin-jest";
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -19,11 +20,15 @@ export default tseslint.config(
   // @ts-ignore
   eslintPluginPrettierRecommended,
   {
-    files: ["src/**/*.ts"],
+    files: ["src/**/*.ts", "features/steps/*.ts"],
     ignores: ["node_modules"],
     // rules: {
     //   semi: "error",
     //   "no-extra-semi": "error",
     // },
+  },
+  {
+    files: ["features/**/*.js"],
+    plugins: [eslintPluginJest],
   },
 );

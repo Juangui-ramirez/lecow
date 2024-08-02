@@ -4,17 +4,19 @@ services:
     restart: always
     ports:
       - "5432:5432"
+    env_file: ./.env
     environment:
-      POSTGRES_USER: lecow
-      POSTGRES_PASSWORD: lecow
+      POSTGRES_USER: $PGUSER
+      POSTGRES_PASSWORD: $PGPASSWORD
     volumes:
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
   adminer:
     image: adminer
     restart: always
+    env_file: ./.env
     environment:
-      - ADMINER_DESIGN=dracula
-      - ADMINER_DEFAULT_SERVER=db
-      - ADMINER_DEFAULT_USER=lecow
+      ADMINER_DESIGN: dracula
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DEFAULT_USER: $PGUSER
     ports:
       - 8080:8080

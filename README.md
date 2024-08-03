@@ -2,7 +2,7 @@
 
 Simple Web App to keep track of expenses by group of peole that hangs out
 
-## Developemt requirements
+## Development requirements
 
 * git and bash
 * docker desktop

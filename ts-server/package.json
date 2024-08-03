@@ -12,7 +12,7 @@
         "eslint:fix": "eslint src --fix",
         "prettier": "prettier --check src",
         "prettier:write": "prettier --write src",
-        "acceptance-test": "jest -- ./features/**/*.ts"
+        "acceptance-test": "jest -- features"
     },
     "license": "AGPLv3",
     "devDependencies": {

@@ -19,7 +19,7 @@ export default tseslint.config(
   // @ts-ignore
   eslintPluginPrettierRecommended,
   {
-    files: ["src/**/*.ts", "features/steps/*.ts"],
+    files: ["src/**/*.ts", "features/**/*.ts"],
     ignores: ["node_modules"],
     // rules: {
     //   semi: "error",

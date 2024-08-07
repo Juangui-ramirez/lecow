@@ -1,6 +1,6 @@
 {
   "testMatch": [
-    "**/*.step.ts"
+    "**/*.steps.ts"
   ],
   "testEnvironment": "node",
   "transform": {

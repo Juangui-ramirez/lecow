@@ -16,8 +16,49 @@ export type Request = ExpressRequest & {
 export type Response = ExpressResponse;
 
 /// Entities
-export interface UserEntity {
+export type NewUserDto = {
+  name: string;
+  email: string;
+}
+
+export type UserEntity = {
   id: number;
   name: string;
   email: string;
+};
+
+export type NewGroupDto = {
+  name: string;
+};
+
+export type GroupEntity = {
+  id: number;
+  name: string;
+};
+
+export type GroupBalanceEntity = {
+  id: number;
+  name: string;
+  balance: string;
+}
+
+export interface ExpenseEntity {
+  id: number;
+  groupId: number;
+  userId: number;
+  description: string;
+  value: number;
+  userCount: number;
+}
+
+export interface NewExpenseDto {
+  groupId: number;
+  userId: number;
+  description: string;
+  value: string;
+  participants: number[];
+}
+
+export type Balance = {
+  balance: string;
 }

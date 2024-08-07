@@ -47,6 +47,12 @@ paths:
       description: Get user balance across all groups, positivalues means in favor, negative values means in debt
       tags:
         - balance
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: OK
@@ -75,6 +81,12 @@ paths:
       description: get all groups where user belongs to with balance
       tags:
         - balance
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: OK
@@ -112,7 +124,7 @@ paths:
                 - $ref: '#/components/schemas/NewGroup'
               required:
                 - name
-  /groups/{groupId}/user/{userId}:
+  /groups/{groupId}/users/{userId}:
     post:
       description: Add a user to a group
       tags:
@@ -135,7 +147,7 @@ paths:
           description: User already added
         '404':
           description: Group or User does no exists
-  /groups/{groupId}/user/{userId}/expenses:
+  /groups/{groupId}/users/{userId}/expenses:
     post:
       description: Create an expense in the group
       tags:
